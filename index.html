@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Carpas para Eventos | ¿Cuántos m² por persona?</title>
+    <meta name="description" content="Calculadora de metros cuadrados de carpa y gazebos para fiestas, casamientos y eventos. Calculá la medida según invitados, mesas redondas, pista de baile y DJ.">
+    <meta name="keywords" content="calculadora carpas eventos, cuantos metros de carpa por persona, medida de gazebo para fiesta, carpas para casamientos m2">
+    <link rel="canonical" href="https://sebiglesias.com.ar/carpas-eventos/">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Calculadora de Carpas para Eventos | Metros cuadrados y medidas">
+    <meta property="og:description" content="¿Alquilás una carpa para tu fiesta? Calculá los metros cuadrados exactos según la cantidad de invitados, mesas y pista de baile.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sebiglesias.com.ar/carpas-eventos/">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2BNDBQP0W7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2BNDBQP0W7');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3381238987477190" crossorigin="anonymous"></script>
+
+    <!-- Schema.org WebApplication & FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Calculadora de Carpas para Eventos",
+          "url": "https://sebiglesias.com.ar/carpas-eventos/",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "Calculadora de medidas y metros cuadrados de carpas para bodas, cumpleaños y eventos."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuántos metros cuadrados de carpa se necesitan por persona?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Para un banquete formal con mesas redondas se calculan entre 1.5 y 1.8 m² por persona. En formato cocktail de pie se necesitan entre 0.75 y 0.9 m² por invitado."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto espacio ocupa una pista de baile dentro de una carpa?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Se calcula que baila entre un 30% y un 50% de los invitados al mismo tiempo, lo que equivale a sumar entre 0.3 y 0.4 m² extra por cada invitado del evento (un mínimo de 16 a 25 m² de pista)."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-20">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🎪</span>
+                <div>
+                    <h1 class="text-lg font-bold text-slate-900 leading-tight">Calculadora de Carpas para Eventos</h1>
+                    <p class="text-xs text-slate-500">Superficie en m² y medidas comerciales recomendadas</p>
+                </div>
+            </div>
+            <a href="https://sebiglesias.com.ar" class="text-xs font-medium text-indigo-600 hover:text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-200">
+                ← Más microapps
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-4 py-6 w-full flex-grow space-y-6">
+
+        <!-- Calculator Card (Above The Fold) -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 md:p-6 space-y-5">
+            
+            <!-- Cantidad de personas -->
+            <div>
+                <div class="flex justify-between items-center mb-2">
+                    <label class="text-sm font-semibold text-slate-900">Cantidad de Invitados:</label>
+                    <span class="text-xl font-bold text-indigo-600 bg-indigo-50 px-3 py-0.5 rounded-lg border border-indigo-200" id="lbl-invitados">80 personas</span>
+                </div>
+                <input type="range" id="rng-invitados" min="10" max="400" step="5" value="80" oninput="updateRange(this.value)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                    <span>10 pers. (íntimo)</span>
+                    <span>100 pers.</span>
+                    <span>250 pers.</span>
+                    <span>400 pers. (grande)</span>
+                </div>
+            </div>
+
+            <!-- Tipo de distribución -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-900 mb-2">Disposición / Formato del evento:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    <button type="button" onclick="setFormat('redondas')" id="btn-redondas" class="format-btn p-3 rounded-xl border-2 text-left transition border-indigo-600 bg-indigo-50/50">
+                        <div class="font-bold text-sm text-slate-900">🍽️ Mesas Redondas</div>
+                        <div class="text-xs text-slate-500 mt-0.5">Banquete formal (1.6 m²/pers)</div>
+                    </button>
+                    <button type="button" onclick="setFormat('tablones')" id="btn-tablones" class="format-btn p-3 rounded-xl border border-slate-200 text-left transition hover:border-slate-300">
+                        <div class="font-bold text-sm text-slate-900">🥖 Tablones / Rectangulares</div>
+                        <div class="text-xs text-slate-500 mt-0.5">Asado o peña (1.25 m²/pers)</div>
+                    </button>
+                    <button type="button" onclick="setFormat('cocktail')" id="btn-cocktail" class="format-btn p-3 rounded-xl border border-slate-200 text-left transition hover:border-slate-300">
+                        <div class="font-bold text-sm text-slate-900">🥂 Cocktail / De pie</div>
+                        <div class="text-xs text-slate-500 mt-0.5">Living / Finger food (0.8 m²/pers)</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Áreas opcionales -->
+            <div>
+                <label class="block text-sm font-semibold text-slate-900 mb-2">Espacios adicionales a techar:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-slate-700">
+                    <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+                        <input type="checkbox" id="chk-pista" checked onchange="calc()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                        <span>💃 Pista de baile (+30 m² aprox)</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+                        <input type="checkbox" id="chk-escenario" onchange="calc()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                        <span>🎧 Escenario DJ / Banda en vivo (+20 m²)</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+                        <input type="checkbox" id="chk-barra" checked onchange="calc()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                        <span>🍹 Barra de tragos (+12 m²)</span>
+                    </label>
+                    <label class="flex items-center gap-2 p-2.5 rounded-lg border border-slate-200 bg-slate-50 cursor-pointer">
+                        <input type="checkbox" id="chk-buffet" onchange="calc()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                        <span>🍲 Mesas de buffet / Catering (+18 m²)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Resultado Panel -->
+            <div class="bg-gradient-to-br from-indigo-900 to-slate-900 rounded-xl p-5 text-white shadow-sm space-y-4">
+                <div class="flex items-center justify-between border-b border-indigo-700/50 pb-3">
+                    <span class="text-xs uppercase tracking-wider font-semibold text-indigo-200">Dimensiones Recomendadas</span>
+                    <span class="text-xs font-bold bg-white/20 px-2.5 py-0.5 rounded-full" id="txt-res-invitados">80 invitados</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-3xl font-extrabold text-amber-300" id="res-m2">170 m²</div>
+                        <div class="text-xs text-indigo-200 mt-1">Superficie mínima total</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-xl sm:text-2xl font-bold" id="res-medida">10 x 18 metros</div>
+                        <div class="text-xs text-indigo-200 mt-1">Carpa estructural típica</div>
+                    </div>
+                    <div class="bg-white/10 rounded-lg p-3">
+                        <div class="text-xl sm:text-2xl font-bold" id="res-gazebos">19 gazebos</div>
+                        <div class="text-xs text-indigo-200 mt-1">Equivalente 3x3m (si modular)</div>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-300 bg-white/5 rounded-lg p-3 border border-white/10 space-y-1">
+                    <div class="font-semibold text-white">Desglose de cálculo:</div>
+                    <div id="txt-desglose">• Comensales: 128 m² | Pista de baile: 30 m² | Barra: 12 m²</div>
+                </div>
+
+                <!-- Botones -->
+                <div class="pt-2 flex flex-col sm:flex-row gap-2">
+                    <button onclick="shareWhatsApp()" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] text-white font-semibold rounded-lg text-sm flex items-center justify-center gap-2 transition shadow-sm">
+                        <span>📲</span> Enviar cotización por WhatsApp
+                    </button>
+                    <button onclick="copySummary()" id="btn-copy" class="w-full sm:w-auto py-2.5 px-4 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg text-sm transition">
+                        Copiar resumen
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Anuncio AdSense Reservado -->
+        <div class="w-full min-h-[100px] flex items-center justify-center bg-slate-100 border border-dashed border-slate-300 rounded-xl text-slate-400 text-xs">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3381238987477190"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Preguntas Frecuentes y Consejos Técnicos -->
+        <section class="bg-white rounded-2xl border border-slate-200 p-6 space-y-5 text-slate-700 text-sm">
+            <h2 class="text-lg font-bold text-slate-900">¿Cómo elegir la carpa adecuada para tu fiesta?</h2>
+
+            <div class="space-y-2">
+                <h3 class="font-semibold text-slate-900">¿Qué ancho estándar tienen las carpas para eventos?</h3>
+                <p class="text-slate-600">
+                    Las carpas estructurales para alquiler suelen venir en pórticos de ancho fijo de <strong>6 metros, 8 metros, 10 metros, 12 metros o 15 metros</strong>. El largo se modula en tramos de 3 o 5 metros (por ejemplo, una carpa de 10x15m, 10x20m o 10x25m).
+                </p>
+            </div>
+
+            <div class="space-y-2">
+                <h3 class="font-semibold text-slate-900">¿Cuánto espacio libre debe quedar alrededor de las mesas?</h3>
+                <p class="text-slate-600">
+                    Siempre debe contemplarse un pasillo de circulación perimetral de al menos <strong>1.2 a 1.5 metros</strong> entre las sillas de las mesas exteriores y las paredes de lona de la carpa para permitir el tránsito ágil de mozos y comensales.
+                </p>
+            </div>
+
+            <div class="space-y-2">
+                <h3 class="font-semibold text-slate-900">¿Y si llueve o hace frío?</h3>
+                <p class="text-slate-600">
+                    Si hay riesgo de lluvia, sumá paredes perimetrales con ventanas transparentes de PVC cristal y canaletas de desagüe si se unen dos o más carpas para evitar goteras en la unión.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <p>Herramienta gratuita creada por <a href="https://sebiglesias.com.ar" class="text-slate-800 font-semibold hover:underline">Sebastián Iglesias</a> · Cálculos orientativos para eventos.</p>
+    </footer>
+
+    <!-- Script de cálculo -->
+    <script>
+        let currentFormat = 'redondas'; // 'redondas', 'tablones', 'cocktail'
+        let invitados = 80;
+
+        const factors = {
+            redondas: 1.6,
+            tablones: 1.25,
+            cocktail: 0.8
+        };
+
+        const standardSizes = [
+            { w: 6, l: 8, m2: 48 },
+            { w: 6, l: 10, m2: 60 },
+            { w: 6, l: 12, m2: 72 },
+            { w: 8, l: 10, m2: 80 },
+            { w: 8, l: 12, m2: 96 },
+            { w: 8, l: 15, m2: 120 },
+            { w: 10, l: 12, m2: 120 },
+            { w: 10, l: 15, m2: 150 },
+            { w: 10, l: 18, m2: 180 },
+            { w: 10, l: 20, m2: 200 },
+            { w: 12, l: 18, m2: 216 },
+            { w: 12, l: 20, m2: 240 },
+            { w: 12, l: 25, m2: 300 },
+            { w: 15, l: 20, m2: 300 },
+            { w: 15, l: 25, m2: 375 },
+            { w: 15, l: 30, m2: 450 },
+            { w: 20, l: 25, m2: 500 },
+            { w: 20, l: 30, m2: 600 }
+        ];
+
+        function updateRange(val) {
+            invitados = parseInt(val, 10);
+            document.getElementById('lbl-invitados').textContent = `${invitados} personas`;
+            calc();
+        }
+
+        function setFormat(fmt) {
+            currentFormat = fmt;
+            ['redondas', 'tablones', 'cocktail'].forEach(f => {
+                const btn = document.getElementById('btn-' + f);
+                if (f === fmt) {
+                    btn.className = "format-btn p-3 rounded-xl border-2 text-left transition border-indigo-600 bg-indigo-50/50";
+                } else {
+                    btn.className = "format-btn p-3 rounded-xl border border-slate-200 text-left transition hover:border-slate-300";
+                }
+            });
+            calc();
+        }
+
+        function calc() {
+            const m2Comensales = Math.round(invitados * factors[currentFormat]);
+
+            let m2Pista = 0;
+            if (document.getElementById('chk-pista').checked) {
+                m2Pista = Math.max(20, Math.round(invitados * 0.35));
+            }
+
+            let m2Escenario = 0;
+            if (document.getElementById('chk-escenario').checked) {
+                m2Escenario = 20;
+            }
+
+            let m2Barra = 0;
+            if (document.getElementById('chk-barra').checked) {
+                m2Barra = 12;
+            }
+
+            let m2Buffet = 0;
+            if (document.getElementById('chk-buffet').checked) {
+                m2Buffet = 18;
+            }
+
+            const totalM2 = m2Comensales + m2Pista + m2Escenario + m2Barra + m2Buffet;
+
+            document.getElementById('txt-res-invitados').textContent = `${invitados} invitados`;
+            document.getElementById('res-m2').textContent = `${totalM2} m²`;
+
+            // Gazebos 3x3m = 9m2
+            const gazebos = Math.ceil(totalM2 / 9);
+            document.getElementById('res-gazebos').textContent = `${gazebos} gazebos`;
+
+            // Find best standard size
+            let bestSize = standardSizes.find(s => s.m2 >= totalM2);
+            if (!bestSize) {
+                // If larger than all predefined
+                const w = 15;
+                const l = Math.ceil(totalM2 / w);
+                bestSize = { w, l, m2: w * l };
+            }
+
+            document.getElementById('res-medida').textContent = `${bestSize.w} x ${bestSize.l} metros (${bestSize.m2} m²)`;
+
+            let desglose = `• Comensales: ${m2Comensales} m²`;
+            if (m2Pista > 0) desglose += ` | Pista: ${m2Pista} m²`;
+            if (m2Escenario > 0) desglose += ` | Escenario: ${m2Escenario} m²`;
+            if (m2Barra > 0) desglose += ` | Barra: ${m2Barra} m²`;
+            if (m2Buffet > 0) desglose += ` | Buffet: ${m2Buffet} m²`;
+            document.getElementById('txt-desglose').textContent = desglose;
+        }
+
+        function getShareText() {
+            const m2 = document.getElementById('res-m2').textContent;
+            const medida = document.getElementById('res-medida').textContent;
+            const desglose = document.getElementById('txt-desglose').textContent;
+
+            return `🎪 *SOLICITUD DE COTIZACIÓN DE CARPA*\n\n` +
+                   `• Invitados: ${invitados} personas\n` +
+                   `• Formato: ${currentFormat}\n` +
+                   `• Superficie necesaria: ${m2}\n` +
+                   `• Medida sugerida: ${medida}\n` +
+                   `${desglose}\n\n` +
+                   `Calculado gratis con: https://sebiglesias.com.ar/carpas-eventos/`;
+        }
+
+        function shareWhatsApp() {
+            const text = encodeURIComponent(getShareText());
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+
+        function copySummary() {
+            navigator.clipboard.writeText(getShareText()).then(() => {
+                const btn = document.getElementById('btn-copy');
+                const old = btn.textContent;
+                btn.textContent = '¡Copiado! ✓';
+                setTimeout(() => btn.textContent = old, 2000);
+            });
+        }
+
+        // Init
+        calc();
+    </script>
+</body>
+</html>
